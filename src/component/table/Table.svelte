@@ -1,6 +1,7 @@
 <script lang="ts">
     import { supabase } from "$lib/supabase";
     import { formatPercent } from "$utils/misc";
+    import { RankBarrier } from "$utils/constants";
     import type { LeaderboardData } from "$utils/types";
 
     let pageSize = 15;
@@ -80,12 +81,20 @@
                     <th scope="col">Response</th>
                     <th scope="col">Score</th>
                     <th scope="col">Std. Dev.</th>
-                    <th scope="col">Voter</th>
+                    <th scope="col">Votes</th>
                 </tr>
             </thead>
             <tbody>
                 {#each data.normalized as rows}
-                    <tr>
+                    <tr
+                        class={{
+                            prize: rows.placement <= RankBarrier[episode][0],
+                            survive:
+                                RankBarrier[episode][1] > rows.placement &&
+                                rows.placement > RankBarrier[episode][0],
+                            lose: rows.placement >= RankBarrier[episode][1],
+                        }}
+                    >
                         <th scope="row" class="rank"
                             >{getRankDisplay(rows.placement)}</th
                         >
@@ -142,6 +151,7 @@
         gap: 1rem;
         justify-content: center;
         margin-top: 1rem;
+        margin-bottom: 1rem;
     }
     table {
         width: 98%;
@@ -158,7 +168,6 @@
     tbody {
         th,
         td {
-            background-color: aquamarine;
             padding: 0.4rem;
             vertical-align: middle;
             white-space: normal;
@@ -167,20 +176,34 @@
             text-align: center;
             background-clip: padding-box;
         }
+    }
 
-        /* round left and right ends of each row */
-        /* 
-        tr th:first-child,
-        tr td:first-child {
-            border-top-left-radius: 0.5rem;
-            border-bottom-left-radius: 0.5rem;
+    tr:nth-child(odd) {
+        .rank,
+        .score {
+            background-color: var(--highlight-odd);
         }
-
-        tr th:last-child,
-        tr td:last-child {
-            border-top-right-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
+        .username,
+        .standard-deviation,
+        .votes {
+            background-color: var(--secondary-odd);
         }
-        */
+        .response {
+            background-color: var(--primary-odd);
+        }
+    }
+    tr:nth-child(even) {
+        .rank,
+        .score {
+            background-color: var(--highlight-even);
+        }
+        .username,
+        .standard-deviation,
+        .votes {
+            background-color: var(--secondary-even);
+        }
+        .response {
+            background-color: var(--primary-even);
+        }
     }
 </style>

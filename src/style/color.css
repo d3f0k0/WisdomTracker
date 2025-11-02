@@ -1,3 +1,29 @@
 .prize {
-   
+    --highlight-odd: #fce04f;
+    --primary-odd: #edebdf;
+    --secondary-odd: #ffea41;
+
+    --highlight-even: #ffeb87;
+    --primary-even: #f6f4eb;
+    --secondary-even: #fff0a2;
+}
+
+.survive {
+    --highlight-odd: #ced4d4;
+    --primary-odd: #edf0f1;
+    --secondary-odd: #d5dfe0;
+
+    --highlight-even: #dae0e0;
+    --primary-even: #f3f7f7;
+    --secondary-even: #dee7e8;
+}
+
+.lose {
+    --highlight-odd: #ed9494;
+    --primary-odd: #f1e3e3;
+    --secondary-odd: #f2a8a8;
+
+    --highlight-even: #f2a3a3;
+    --primary-even: #f7ebeb;
+    --secondary-even: #f6b4b4;
 }
