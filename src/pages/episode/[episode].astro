@@ -1,5 +1,10 @@
 ---
-import Table from "../component/table/Table.svelte";
+import Table from "../../component/table/Table.svelte";
+
+const { episode } = Astro.params;
+
+const episodeNumber = Number(episode) || 1;
+console.log(episodeNumber);
 ---
 
 <html lang="en">
@@ -10,8 +15,8 @@ import Table from "../component/table/Table.svelte";
     </head>
     <body>
         <main>
-            <h1>Welcome to Wisdom Tracker! WIP</h1>
-            <Table client:load />
+            <h1>EWOW Episode {episodeNumber} Statistics</h1>
+            <Table episode={episodeNumber} client:load />
         </main>
     </body>
 </html>
