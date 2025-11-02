@@ -1,8 +1,5 @@
 <script lang="ts">
     import * as d3 from "d3";
-    import { onMount } from "svelte";
-
-    import "$lib/font.css"
     import { supabase } from "$lib/supabase";
     import { ContestantsAmount } from "$utils/constants";
     import { formatPercent } from "$utils/misc";

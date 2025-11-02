@@ -1,5 +1,4 @@
 <script lang="ts">
-    import "$lib/font.css";
     import { supabase } from "$lib/supabase";
     import { formatPercent } from "$utils/misc";
     import type { LeaderboardData } from "$utils/types";
@@ -136,7 +135,6 @@
         justify-content: center;
         align-items: center;
         background-color: lightgray;
-        border-radius: 1rem;
         font-family: "Overpass Variable";
     }
     .page-nav {
@@ -171,6 +169,7 @@
         }
 
         /* round left and right ends of each row */
+        /* 
         tr th:first-child,
         tr td:first-child {
             border-top-left-radius: 0.5rem;
@@ -182,5 +181,6 @@
             border-top-right-radius: 0.5rem;
             border-bottom-right-radius: 0.5rem;
         }
+        */
     }
 </style>

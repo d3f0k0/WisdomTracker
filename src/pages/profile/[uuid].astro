@@ -1,6 +1,7 @@
 ---
-import NormalizedGraph from "../../component/profile/NormalizedGraph.svelte";
-import LifeGraph from "../../component/profile/LifeGraph.svelte";
+import Layout from "src/component/Layout.astro";
+import NormalizedGraph from "src/component/profile/NormalizedGraph.svelte";
+import LifeGraph from "src/component/profile/LifeGraph.svelte";
 import { supabase } from "$lib/supabase"
 
 const {uuid} = Astro.params;
@@ -25,21 +26,10 @@ const contestantData = await getContestantData(uuid);
 ---
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
+<Layout title="Profile">
     <h1>{contestantData ? contestantData.username: "No user found"}</h1>
     <p>{contestantData?.subtitle}</p>
     <p>{uuid}</p>
     <NormalizedGraph {uuid} client:load />
     <LifeGraph {uuid} client:load />
-</body>
-</html>
-
-
-<style></style>
+</Layout>

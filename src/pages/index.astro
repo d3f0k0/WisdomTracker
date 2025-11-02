@@ -1,24 +1,9 @@
 ---
-import Table from "../component/table/Table.svelte";
+import Layout from "src/component/Layout.astro";
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Wisdom Tracker</title>
-    </head>
-    <body>
-        <main>
-            <h1>Welcome to Wisdom Tracker! WIP</h1>
-            <Table client:load />
-        </main>
-    </body>
-</html>
+<Layout>
+    <h1>Welcome to Wisdom Tracker, WIP!</h1>
 
-<style is:global>
-    .body {
-        margin: 0;
-        padding: 0;
-    }
-</style>
+</Layout>
+
