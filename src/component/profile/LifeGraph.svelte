@@ -7,7 +7,7 @@
     let { uuid } = $props();
 
     let livesData = $state<LivesStats[]>([]);
-    onMount(async () => {
+    async function getLifeData(uuid : string) {
         const { data, error } = await supabase
             .from("ranking")
             .select(`lives, episode`)
@@ -19,8 +19,8 @@
         }
         livesData = data;
         livesData.sort((a, b) => a.episode - b.episode)
-    });
-
+        return data
+    }
     let width = $state(800);
     const height = 350;
     const margin = { top: 50, right: 20, bottom: 30, left: 75 };
@@ -49,6 +49,9 @@
 </script>
 
 <div class="life-graph">
+{#await getLifeData(uuid)}
+    <p>Loading...</p>
+{:then data} 
     <svg
     {width}
     {height}
@@ -132,6 +135,7 @@
         {/each}
     </g>
 </svg>
+{/await}
 </div>
 
 <style>

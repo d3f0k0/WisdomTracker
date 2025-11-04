@@ -1,6 +1,7 @@
 export type NormalizedStats = {
     episode: number,
-    normalized: number
+    normalized: number,
+    rank: number
 }
 
 export type LivesStats = {

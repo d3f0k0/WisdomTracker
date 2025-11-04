@@ -98,7 +98,7 @@
                         <th scope="row" class="rank"
                             >{getRankDisplay(rows.placement)}</th
                         >
-                        <td class="username">{rows.player.username}</td>
+                        <td class="username"><a href={`/profile/${rows.uuid}`}>{rows.player.username}</a></td>
                         <td class="response">{rows.response}</td>
                         <td class="score">{formatPercent(rows.average)}</td>
                         <td class="standard-deviation"

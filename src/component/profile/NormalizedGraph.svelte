@@ -1,7 +1,7 @@
 <script lang="ts">
     import * as d3 from "d3";
     import { supabase } from "$lib/supabase";
-    import { ContestantsAmount } from "$utils/constants";
+    import { ContestantsAmount, RankBarrier } from "$utils/constants";
     import { formatPercent } from "$utils/misc";
 
     import type { NormalizedStats } from "$utils/types";
@@ -20,6 +20,7 @@
             return [];
         }
         normalizedData = data.map((d) => ({
+            rank: d.rank,
             normalized: Math.max(
                 (ContestantsAmount[d.episode] - d.rank) /
                     (ContestantsAmount[d.episode] - 1),
@@ -136,17 +137,23 @@
     <g class="data">
         <path d={path} fill="none" stroke="steelblue" stroke-width="4" />
         {#each normalizedData as d}
-            <circle
+            <circle class={{
+                            prize: d.rank <= RankBarrier[d.episode][0],
+                            survive:
+                                RankBarrier[d.episode][1] > d.rank &&
+                                d.rank > RankBarrier[d.episode][0],
+                            lose: d.rank >= RankBarrier[d.episode][1],
+                        }}
                 cx={xScale(d.episode)}
                 cy={yScale(d.normalized)}
                 r="6"
-                fill="tomato"
             />
         {/each}
     </g>
 </svg>
 {/await}
 </div>
+
 <style>
     :global(line) {
         stroke: black;
@@ -164,10 +171,13 @@
             
         }
     }
-
     :global(.x-axis) {
         text {
             font-family: "Overpass Variable";
         }
+    }
+
+    :global(circle) {
+        fill: var(--highlight-odd);
     }
 </style>
