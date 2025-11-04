@@ -1,4 +1,5 @@
 ---
+import Image from "astro/components/Image.astro";
 import Layout from "src/component/Layout.astro";
 import NormalizedGraph from "src/component/profile/NormalizedGraph.svelte";
 import LifeGraph from "src/component/profile/LifeGraph.svelte";
@@ -10,8 +11,13 @@ async function getContestantData(uuid : string | undefined) {
     const { data, error } = await supabase
         .from("player")
         .select(`
+        uuid,
         username,
-        subtitle`)
+        subtitle,
+        booksona (
+            image_trim_uuid
+        )
+        `)
         .eq("uuid", uuid).single();
     if (error) {
         console.error("Supabase error:", error);
@@ -27,9 +33,17 @@ const contestantData = await getContestantData(uuid);
 
 
 <Layout title="Profile">
-    <h1>{contestantData ? contestantData.username: "No user found"}</h1>
-    <p>{contestantData?.subtitle}</p>
-    <p>{uuid}</p>
+    <div class="profile-data">
+        <h1>{contestantData ? contestantData.username: "No user found"}</h1>
+        <p>{contestantData?.subtitle}</p>
+        <p>{uuid}</p>
+        <Image 
+        src=`https://cdn.booksona.lol/${contestantData?.booksona.image_trim_uuid}.png` 
+        alt=`Booksona image of ${contestantData?.username}`}
+        width={200}
+        height={200}
+        />
+    </div>
     <NormalizedGraph {uuid} client:load />
     <LifeGraph {uuid} client:load />
 </Layout>
