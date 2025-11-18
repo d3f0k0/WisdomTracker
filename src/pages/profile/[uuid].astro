@@ -16,6 +16,9 @@ async function getContestantData(uuid : string | undefined) {
         subtitle,
         booksona (
             image_trim_uuid
+        ),
+        overall_rank (
+            rank
         )
         `)
         .eq("uuid", uuid).single();
@@ -43,6 +46,7 @@ const contestantData = await getContestantData(uuid);
         width={200}
         height={200}
         />
+        <h1>Current Rank: {contestantData?.overall_rank[0].rank}</h1>
     </div>
     <NormalizedGraph {uuid} client:load />
     <LifeGraph {uuid} client:load />

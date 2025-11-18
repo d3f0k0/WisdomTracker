@@ -143,7 +143,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: lightgray;
         font-family: "Overpass Variable";
     }
     .page-nav {
@@ -157,12 +156,8 @@
         width: 98%;
         font-size: 1.5rem;
         table-layout: fixed;
-
-        /* use separate so border-radius on cells works reliably */
         border-collapse: separate;
-        border-spacing: 1; /* set >0 if you want gaps between cells */
-        border-radius: 0.5rem; /* rounds outer corners */
-        overflow: hidden; /* clip corners for outer table radius */
+        border-spacing: 1;
     }
 
     tbody {

@@ -1,6 +1,5 @@
 <script lang="ts">
     import * as d3 from "d3";
-    import { onMount } from "svelte";
     import { supabase } from "$lib/supabase";
     import type { LivesStats } from "$utils/types";
 
